@@ -2,6 +2,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <stdio.h>
 #include "system.h"
+#include "game.h"
 
 
 const int WIDTH = 800, HEIGHT = 600;
@@ -23,6 +24,8 @@ int init() {
   if (!renderer) {
     return error("Renderer Creation Error: %s\n", SDL_GetError());
   }
+
+  if (start() == 1) return 1;
   return 0;
 }
 
@@ -42,13 +45,7 @@ int drawFrame() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
-  // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-  // SDL_FRect rect = {WIDTH / 4.0f, HEIGHT / 4.0f, WIDTH / 2.0f, HEIGHT / 2.0f};
-  // SDL_RenderFillRect(renderer, &rect);
-
-  SDL_FRect transform = { 0, 0, (float)(32 * 2.4), (float)(32 * 2.4) };
-  SDL_FRect frame = { 0, 0, 32, 32 };
-  if (loadImg("assets/images/player.png", &frame, &transform) == 1) return 1;
+  if (update() == 1) return 1;
 
   SDL_RenderPresent(renderer);
   SDL_Delay(FRAME_DELAY);

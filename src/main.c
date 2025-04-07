@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "system.h"
 #include "rendering.h"
+#include "game.c"
 
 
 int main(int argc, str argv[]) {
