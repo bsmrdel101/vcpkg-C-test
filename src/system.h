@@ -3,4 +3,4 @@
 
 typedef char* str;
 
-int error(char *msg);
+int error(char *msg, ...);

@@ -3,7 +3,6 @@
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-SDL_Surface *screenSurface;
 
 int init();
-void drawFrame();
+int drawFrame();

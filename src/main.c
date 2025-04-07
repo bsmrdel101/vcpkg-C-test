@@ -10,14 +10,15 @@ int main(int argc, str argv[]) {
     return error("Error during initialization");
   }
 
-  int running = 1;
+  bool running = true;
+  bool error = false;
   SDL_Event event;
   while (running) {
     while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_EVENT_QUIT) running = 0;
+      if (event.type == SDL_EVENT_QUIT) running = false;
     }
 
-    drawFrame();
+    if ((!error && drawFrame()) == 1) error = true;
   }
 
   SDL_DestroyWindow(window);

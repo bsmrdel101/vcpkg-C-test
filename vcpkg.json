@@ -4,7 +4,6 @@
     {
       "name": "sdl3-image",
       "features": [
-        "core",
         "jpeg",
         "png"
       ]

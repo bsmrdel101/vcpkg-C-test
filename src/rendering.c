@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include "system.h"
 
+
 const int WIDTH = 800, HEIGHT = 600;
 const int FRAME_DELAY = 16;
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
-SDL_Surface *screenSurface = NULL;
 
 int init() {
   if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0) {
@@ -23,24 +23,22 @@ int init() {
   if (!renderer) {
     return error("Renderer Creation Error: %s\n", SDL_GetError());
   }
-
-  screenSurface = SDL_GetWindowSurface(window);
   return 0;
 }
 
-int loadImg(str path, float x, float y, float width, float height) {
+int loadImg(str path, SDL_FRect *frame, SDL_FRect *transform) {
   SDL_Texture *texture = IMG_LoadTexture(renderer, path);
   if(!texture) {
     return error("Error creating texture: %s\n", SDL_GetError());
+    return 1;
   }
 
-  SDL_FRect destRect = { x, y, width, height };
-  SDL_RenderTexture(renderer, texture, NULL, NULL);
+  SDL_RenderTexture(renderer, texture, frame, transform);
   SDL_DestroyTexture(texture);
   return 0;
 }
 
-void drawFrame() {
+int drawFrame() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
@@ -48,8 +46,11 @@ void drawFrame() {
   // SDL_FRect rect = {WIDTH / 4.0f, HEIGHT / 4.0f, WIDTH / 2.0f, HEIGHT / 2.0f};
   // SDL_RenderFillRect(renderer, &rect);
 
-  loadImg("assets/owl.jpg", 100, 100, 200, 150);
+  SDL_FRect transform = { 0, 0, (float)(32 * 2.4), (float)(32 * 2.4) };
+  SDL_FRect frame = { 0, 0, 32, 32 };
+  if (loadImg("assets/images/player.png", &frame, &transform) == 1) return 1;
 
   SDL_RenderPresent(renderer);
   SDL_Delay(FRAME_DELAY);
+  return 0;
 }
