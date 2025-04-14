@@ -24,3 +24,4 @@
 ## Getting Started
 - Run `make`
 - If you want to make a production build then run `make prod`
+
