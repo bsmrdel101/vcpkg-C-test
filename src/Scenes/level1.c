@@ -1,4 +1,5 @@
 #include "../Core/rendering.h"
+#include "../GameObjects/Player/player.c"
 #include "level1.h"
 
 
@@ -16,9 +17,6 @@ int start() {
 
 int update() {
   drawBackground();
-  
-  SDL_FRect transform = { 0, 0, (float)(32 * 2.4), (float)(32 * 2.4) };
-  SDL_FRect frame = { 0, 0, 32, 32 };
-  if (loadImg("assets/sprites/player.png", &frame, &transform) == 1) return error("Failed to load player");
+  drawPlayer();
   return 0;
 }

@@ -42,6 +42,21 @@ int loadImg(str path, SDL_FRect *frame, SDL_FRect *transform) {
   return 0;
 }
 
+int loadAnim(str path, SDL_FRect *frames, i8 frameCount, SDL_FRect *transform) {
+  SDL_Texture *texture = IMG_LoadTexture(renderer, path);
+  if(!texture) {
+    return error("Error creating texture: %s\n", SDL_GetError());
+    return 1;
+  }
+
+  int i;
+  for (i = 0; i < frameCount; i++) {
+    SDL_RenderTexture(renderer, texture, &frames[i], transform);
+  }
+  SDL_DestroyTexture(texture);
+  return 0;
+}
+
 int drawFrame() {
   SDL_SetRenderDrawColor(renderer, BG_COLOR[0], BG_COLOR[1], BG_COLOR[2], BG_COLOR[3]);
   SDL_RenderClear(renderer);
