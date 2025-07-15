@@ -1,9 +1,8 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <stdio.h>
-#include "system.h"
-#include "rendering.h"
-#include "game.c"
+#include "./Core/rendering.h"
+#include "./Scenes/level1.c"
 
 
 int main(int argc, str argv[]) {

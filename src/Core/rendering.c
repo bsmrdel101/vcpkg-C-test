@@ -2,11 +2,12 @@
 #include <SDL3_image/SDL_image.h>
 #include <stdio.h>
 #include "system.h"
-#include "game.h"
+#include "../Scenes/level1.h"
 
 
-const int WIDTH = 800, HEIGHT = 600;
-const int FRAME_DELAY = 16;
+const u16 WIDTH = 800, HEIGHT = 600;
+const u8 FRAME_DELAY = 16;
+const u8 BG_COLOR[] = {0, 0, 0, 255};
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 
@@ -42,7 +43,7 @@ int loadImg(str path, SDL_FRect *frame, SDL_FRect *transform) {
 }
 
 int drawFrame() {
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, BG_COLOR[0], BG_COLOR[1], BG_COLOR[2], BG_COLOR[3]);
   SDL_RenderClear(renderer);
 
   if (update() == 1) return 1;
